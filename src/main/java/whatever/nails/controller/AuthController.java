@@ -10,6 +10,8 @@ import whatever.nails.mapper.RegistrationDtoToUserMapper;
 import whatever.nails.repository.RoleJpaRepository;
 import whatever.nails.repository.UserJpaRepository;
 
+import javax.transaction.Transactional;
+
 @RestController
 public class AuthController {
     private UserJpaRepository userRep;
@@ -25,6 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Transactional
     public RegistrationDto register(RegistrationDto dto){
         User user = mapper.convert(dto, User.class);
         userRep.save(user);
